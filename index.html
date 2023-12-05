@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form and Google Maps</title>
+  <link rel="stylesheet" href="css/style.css"> <!-- Linking the CSS file -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5BFpnFF4QjsnZwWuNtYDNX_gK9H2LjA0&libraries=places"></script>
+</head>
+<body>
+
+<div class="container">
+  <div class="left-half">
+    <form>
+
+      <h2>Create your Campaign</h2>
+
+      <!-- Input for title -->
+      <div>
+        <label for="title">Campaign Title:</label>
+        <input type="text" id="title" name="title">
+      </div>
+
+      <!-- Input for Location -->
+      <div>
+        <label for="location">Location:</label>
+        <input list="locations" id="location" name="location">
+        <datalist id="locations">
+          <option value="California">
+          <option value="Texas">
+          <option value="Florida">
+          <option value="Hawaii">
+          <option value="Washington">
+        </datalist>
+      </div>
+
+      <div>
+        <label for="start-time">Start Time:</label>
+        <input type="datetime-local" id="start-time" name="start-time">
+      </div>
+
+      <!-- Date and Time Picker for End Time -->
+      <div>
+        <label for="end-time">End Time:</label>
+        <input type="datetime-local" id="end-time" name="end-time">
+      </div>
+
+      <!-- Checkbox for Show only with available slots -->
+      <div>
+        <label for="available-slots">Show only with available slots:</label>
+        <input type="checkbox" id="available-slots" name="available-slots">
+      </div>
+
+
+
+      <div>
+        <h3>Target Audience</h3>
+
+        <div>
+          <div>
+
+            <label for="age"><span class="toggle" onclick="toggleOptions('age')">+ :</span> Age</label>
+            <div id="age" class="options">
+              <label><input type="checkbox" name="age" value="under18">Under 18</label><br>
+              <label><input type="checkbox" name="age" value="18to24">18 - 24</label><br>
+              <label><input type="checkbox" name="age" value="25to34">25 - 34</label><br>
+              <label><input type="checkbox" name="age" value="35to44">35 - 44</label><br>
+              <label><input type="checkbox" name="age" value="45to54">45 - 54</label><br>
+              <label><input type="checkbox" name="age" value="55to64">55 - 64</label><br>
+              <label><input type="checkbox" name="age" value="65plus">65+</label><br>
+            </div>
+
+          </div>
+
+          <div>
+            <label for="income"><span class="toggle" onclick="toggleOptions('income')">+ :</span>Income </label>
+            <div id="income" class="options">
+              <label><input type="checkbox" name="income" value="low">Low</label><br>
+              <label><input type="checkbox" name="income" value="medium">Medium</label><br>
+              <label><input type="checkbox" name="income" value="high">High</label><br>
+            </div>
+          </div>
+
+          <div>
+            <label for="interest_activity"><span class="toggle" onclick="toggleOptions('interest_activity')">+ :</span> Interest & Activity </label>
+            <div id="interest_activity" class="options">
+              <label><input type="checkbox" name="interest_activity" value="sports">Sports</label><br>
+              <label><input type="checkbox" name="interest_activity" value="music">Music</label><br>
+              <label><input type="checkbox" name="interest_activity" value="travel">Travel</label><br>
+              <label><input type="checkbox" name="interest_activity" value="cooking">Cooking</label><br>
+              <!-- Add more options as needed -->
+            </div>
+          </div>
+
+          <div>
+            <label for="life_stage"><span class="toggle" onclick="toggleOptions('life_stage')">+ :</span>Life Stage </label>
+            <div id="life_stage" class="options">
+              <label><input type="checkbox" name="life_stage" value="student">Student</label><br>
+              <label><input type="checkbox" name="life_stage" value="young_adult">Young Adult</label><br>
+              <label><input type="checkbox" name="life_stage" value="adult">Adult</label><br>
+              <label><input type="checkbox" name="life_stage" value="senior">Senior</label><br>
+            </div>
+          </div>
+
+          <div>
+            <label for="gender"><span class="toggle" onclick="toggleOptions('gender')">+ :</span> Gender </label>
+            <div id="gender" class="options">
+              <label><input type="checkbox" name="gender" value="male">Male</label><br>
+              <label><input type="checkbox" name="gender" value="female">Female</label><br>
+              <label><input type="checkbox" name="gender" value="other">Other</label><br>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- Checkboxes for Age -->
+        <div>
+          <p>Age:</p>
+          <label for="teenage">
+            <input type="checkbox" id="teenage" name="age" value="teenage"> Teenage
+          </label><br>
+          <label for="young">
+            <input type="checkbox" id="young" name="age" value="young"> Young
+          </label><br>
+          <label for="middle-age">
+            <input type="checkbox" id="middle-age" name="age" value="middle-age"> Middle Age
+          </label><br>
+          <label for="old">
+            <input type="checkbox" id="old" name="age" value="old"> Old
+          </label>
+        </div>
+
+        <!-- Checkboxes for Food Habits -->
+        <div>
+          <p>Food Habits:</p>
+          <label for="icecream-lover">
+            <input type="checkbox" id="icecream-lover" name="food-habits" value="icecream-lover"> Icecream Lover
+          </label><br>
+          <label for="burger-lover">
+            <input type="checkbox" id="burger-lover" name="food-habits" value="burger-lover"> Burger Lover
+          </label><br>
+          <label for="pizza-lover">
+            <input type="checkbox" id="pizza-lover" name="food-habits" value="pizza-lover"> Pizza Lover
+          </label>
+        </div>
+
+        <!-- Checkboxes for Gadgets Lovers -->
+        <div>
+          <p>Gadgets Lovers:</p>
+          <label for="smartphones">
+            <input type="checkbox" id="smartphones" name="gadgets-lover" value="smartphones"> Smartphones
+          </label><br>
+          <label for="laptops">
+            <input type="checkbox" id="laptops" name="gadgets-lover" value="laptops"> Laptops
+          </label><br>
+          <label for="tablets">
+            <input type="checkbox" id="tablets" name="gadgets-lover" value="tablets"> Tablets
+          </label>
+        </div>
+      </div>
+
+      <!-- Checkboxes for Average Viewership -->
+      <div>
+        <p>Average Viewership:</p>
+        <label for="100-person">
+          <input type="checkbox" id="100-person" name="viewership" value="100 person/min"> 100 person/min
+        </label><br>
+        <label for="50-person">
+          <input type="checkbox" id="50-person" name="viewership" value="50 person/min"> 50 person/min
+        </label><br>
+        <label for="10-person">
+          <input type="checkbox" id="10-person" name="viewership" value="10 person/min"> 10 person/min
+        </label>
+      </div>
+      <!-- Input for Slot Price Per Minute -->
+      <div>
+        <label for="slot-price">Slot Price Per Minute:</label>
+        <input type="range" id="slot-price" name="slot-price" min="1" max="100" step="1" placeholder="Enter price">
+      </div>
+
+      <div>
+        <label for="assets">Pick Your Assets (AEM, Polaris, Express):</label>
+        <input type="file" id="assets" name="assets" multiple accept=".zip, .rar, .pdf"> <!-- Limit file types to ZIP, RAR, PDF -->
+
+      </div>
+
+      <div>
+        <label for="estimated-cost">Estimated Cost:</label>
+        <input type="text" id="estimated-cost" name="estimated-cost" value="$1000" readonly>
+      </div>
+
+      <!-- Submit Button -->
+      <input type="submit" value="Submit">
+
+
+    </form>
+  </div>
+  <div class="right-half">
+    <h2>Google Maps</h2>
+    <div id="map"></div>
+  </div>
+</div>
+
+<script>
+  function initMap() {
+    const map = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: 37.0902, lng: -95.7129 }, // Center map to the USA
+      zoom: 4 // Set an initial zoom level
+    });
+
+    const states = [
+      { name: 'California', coordinates: { lat: 36.7783, lng: -119.4179 }, info: 'California, 2 slots, $10 per slot, 100 p/min' },
+      { name: 'Texas', coordinates: { lat: 31.9686, lng: -99.9018 }, info: 'Texas, 2 slots, $10 per slot, 100 p/min' },
+      { name: 'Florida', coordinates: { lat: 27.994402, lng: -81.760254 }, info: 'Florida, 2 slots, $10 per slot, 100 p/min' },
+      { name: 'Hawaii', coordinates: { lat: 20.7984, lng: -156.3319 }, info: 'Hawaii, 2 slots, $10 per slot, 100 p/min' },
+      { name: 'Washington', coordinates: { lat: 47.7511, lng: -120.7401 }, info: 'Washington, 2 slots, $10 per slot, 100 p/min' }
+    ];
+
+    for (const state of states) {
+      const marker = new google.maps.Marker({
+        position: state.coordinates,
+        map,
+        title: state.name
+      });
+
+      const infowindow = new google.maps.InfoWindow({
+        content: state.info
+      });
+
+      marker.addListener('mouseover', () => {
+        infowindow.open(map, marker);
+      });
+
+      marker.addListener('mouseout', () => {
+        infowindow.close(map, marker);
+      });
+    }
+  }
+  google.maps.event.addDomListener(window, 'load', initMap);
+  function updatePrice(val) {
+    document.getElementById('price').innerText = val;
+  }
+
+  function toggleOptions(demographic) {
+    const options = document.getElementById(`${demographic}`);
+    options.style.display = options.style.display === 'none' ? 'block' : 'none';
+  }
+</script>
+
+</body>
+</html>
