@@ -1,0 +1,129 @@
+/* styles.css */
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.left-half, .right-half {
+  flex: 1;
+  height: 100%;
+}
+
+form {
+  padding: 20px;
+}
+
+form div {
+  padding: 5px;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+.options {
+  display: none;
+}
+
+h3 {
+  margin-top: 0;
+}
+.asset-selectors {
+  padding: 20px;
+}
+#asset-selector-dialog {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  /* width: 100%; */
+  height: 80%;
+  border: 0;
+  border-radius: 4px;
+  background-color: white;
+  z-index: 99999;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+#destination-selector-dialog {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  width: 640px;
+  height: 700px;
+  border: 0;
+  border-radius: 4px;
+  background-color: white;
+  z-index: 99999;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+#asset-selector-dialog::backdrop,
+#destination-selector-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.asset-selectors {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background: #f2f2f2;
+}
+.asset-selectors > div {
+  margin-bottom: 20px;
+}
+.asset-selectors > div > button {
+  padding: 10px 20px;
+  font-size: 1.5em;
+  background: #f2f2f2;
+  border: 2px solid #000;
+}
+.asset-selectors > div > button:hover {
+  background: #000;
+  color: #fff;
+}
+
+.asset-selectors {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.asset-selector-rail {
+  height: 75vh;
+  border-right: 1px solid #DDD;
+  overflow-y: auto;
+  overflow-x:hidden;
+  width:30vh;
+}
+
+.drop-target {
+  border: 2px dashed black;
+  background-color: aliceblue;
+  height: 500px;
+  text-align: center;
+  list-style: inside;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+}
+
+.drop-target.is-dragged {
+  border: 3px solid black;
+}

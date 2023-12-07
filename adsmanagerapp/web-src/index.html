@@ -1,0 +1,486 @@
+<!-- <license header> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="theme-color" content="#333333">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>screensadmanager</title>
+  <link rel="stylesheet" href="src/style.css">
+  <script src="https://experience.adobe.com/solutions/CQ-assets-selectors/static-assets/resources/assets-selectors.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5BFpnFF4QjsnZwWuNtYDNX_gK9H2LjA0&libraries=places"></script>
+  <script>
+    let imsInstance = null;
+
+    const imsProps = {
+      imsClientId: "ngdm_test_client",
+      imsScope: "AdobeID,openid,read_organizations,additional_info.projectedProductContext",
+      redirectUrl: window.location.href,
+      modalMode: true,
+      env:"STAGE",
+      // Optional parameters:
+      // modalMode: false, // set to false to open in a full page reload flow
+      // adobeImsOptions: {
+      //     modalSettings: {
+      //         allowOrigin: window.location.origin,
+      //     },
+      //     useLocalStorage: true,
+      // },
+      // onImsServiceInitialized: (service) => {
+      //     console.log("onImsServiceInitialized", service);
+      // },
+      // onAccessTokenReceived: (token) => {
+      //     console.log("onAccessTokenReceived", token);
+      // },
+      // onAccessTokenExpired: () => {
+      //     console.log("onAccessTokenError");
+      //     // re-trigger sign-in flow
+      // },
+      // onErrorReceived: (type, msg) => {
+      //     console.log("onErrorReceived", type, msg);
+      // },
+    };
+
+    /**
+     * Registers the IMS token service with the PureJSSelectors library, which is required when using `renderAssetSelectorWithAuthFlow` with a pop-up.
+     *
+     * NOTE: If you don't register the token service and your redirectUrl does not match the one you registered with the imsClientId,
+     * the sign-in flow will fail and a page reload might be required. If you use a different redirectUrl where the IMS provider will
+     * redirect to after the user signs in, you must also load this function on that redirect page for the pop-up to work correctly.
+     *
+     * It is recommended that you call `registerAssetsSelectorsAuthService` on page load.
+     *
+     * @function load
+     */
+    function registerImsAuthService() {
+      // Register the IMS token service with PureJSSelectors.
+      const registeredTokenService = PureJSSelectors.registerAssetsSelectorsAuthService(imsProps);
+
+      // Store the token service instance in `imsInstance` for use outside of the asset selector.
+      // Some helpful functions:
+      // - registeredTokenService.getAccessToken() - to get the current access token
+      // - registeredTokenService.triggerAuthFlow() or registeredTokenService.signIn() - to trigger the sign-in flow based on the imsProps modalMode setting (true/false);
+      // - registeredTokenService.signOut() - to sign out the user and remove the token
+      // - registeredTokenService.refreshToken() - to refresh the existing token
+      imsInstance = registeredTokenService;
+    };
+
+    // Must be register token service before the selectors are rendered.
+    registerImsAuthService();
+
+    /**
+     * Closes the Asset Selector dialog when it is called.
+     * This is a helper function used by Asset Selectors UI.
+     *
+     * @function onClose
+     */
+    function onClose() {
+      const selectorDialog = document.getElementById('asset-selector-dialog');
+      selectorDialog.close();
+    }
+
+    /**
+     * Closes the Destination Selector dialog when it is called.
+     * This is a helper function used by Asset Selectors UI.
+     *
+     * @function onClose
+     */
+    function destinationSelectorOnClose() {
+      const selectorDialog = document.getElementById('destination-selector-dialog');
+      selectorDialog.close();
+    }
+
+    /**
+     * Handles the selected asset when it is called.
+     * This is a helper function used by Asset Selectors UI.
+     *
+     * @function handleSelection
+     * @param {object} selection - The selected asset.
+     */
+    function handleSelection(selection) {
+      console.log('Selected asset:', selection);
+      onClose();
+    };
+
+
+
+    /**
+     * Handles the selected path when it is called.
+     * This is a helper function used by Asset Selectors UI.
+     *
+     * @function handleOnConfirm
+     * @param {object} selection - The selected path.
+     */
+    function handleOnConfirm(selection) {
+      console.log('Selected path:', selection);
+      destinationSelectorOnClose();
+    };
+
+
+    /**
+     * Renders an asset selector user interface using the PureJSSelectors library.
+     * When the asset selector is ready to be displayed, it will be shown in a dialog box.
+     *
+     * @async
+     * @function renderAssetSelectorWithImsFlow
+     * @returns {Promise<void>}
+     */
+    async function renderAssetSelectorWithImsFlow() {
+
+      console.log("I am here");
+
+      /**
+       * Props for the asset selector UI.
+       *
+       * @typedef {Object} AssetSelectorProps
+       * @property {string} discoveryURL - The URL for the AEM Discovery service.
+       * @property {string} imsOrg - The IMS organization ID for the user.
+       * @property {string} apiKey - The API key for the AEM Assets backend.
+       * @property {Function} onClose - A callback function to be called when the asset selector dialog is closed.
+       * @property {Function} handleSelection - A callback function to be called when an asset is selected.
+       * @property {Function} handleNavigateToAsset - A callback function to be called when the user clicks on an asset to navigate to it.
+       * @property {string} env - The environment where the asset selector is being used.
+       */
+
+      /** @type {AssetSelectorProps} */
+      const assetSelectorProps = {
+        "onClose": onClose,
+        "handleSelection": handleSelection,
+        "env": "STAGE",
+        "repositoryId":"delivery-p47604-e144858-cmstg.adobeaemcloud.com",
+        //imsOrg:"999F6D0B617C10B80A495E2E@AdobeOrg"
+      }
+
+      // Get the container element where the asset selector will be rendered.
+      const container = document.getElementById('asset-selector');
+      console.log(container);
+
+      /**
+       * Renders the asset selector UI with IMS authentication, and shows the dialog when it's ready.
+       *
+       * @function renderAssetSelectorWithAuthFlow
+       * @param {Element} container - The container element where the asset selector will be rendered.
+       * @param {AssetSelectorProps} props - Props for the asset selector UI.
+       * @param {Function} callback - A callback function to be called when the UI is ready to be displayed.
+       */
+      PureJSSelectors.renderAssetSelectorWithAuthFlow(container, assetSelectorProps, () => {
+        const assetSelectorDialog = document.getElementById('asset-selector-dialog');
+        assetSelectorDialog.showModal();
+      });
+    }
+
+    /**
+     * Renders a Destination Selector UI with IMS authentication.
+     * The UI will use the registered IMS instance (created in registerAssetsSelectorsAuthService) to get the required tokens.
+     * If a valid token is not present, the sign-in flow will be triggered in either pop-up or full page reload mode based on the configurations set in the imsProps.
+     * Note that registerAssetsSelectorsAuthService must be called before triggering this flow.
+     * For best user experience, it is recommended that registerAssetsSelectorsAuthService is called on page load prior to calling this function.
+     *
+     * @async
+     * @function renderDestinationSelectorWithImsFlow
+     * @returns {Promise<void>}
+     */
+    async function renderDestinationSelectorWithImsFlow() {
+      /**
+       * Props for the Destination Selector UI.
+       *
+       * @typedef {Object} DestinationSelectorProps
+       * @property {string} imsOrg - The IMS organization ID for the user.
+       * @property {Function} onClose - A callback function to be called when the Destination Selector dialog is closed.
+       * @property {Function} handleSelection - A callback function to be called when a destination is selected.
+       * @property {string} env - The environment where the Destination Selector is being used.
+       */
+
+      /** @type {DestinationSelectorProps} */
+      const props = {
+        "onClose": destinationSelectorOnClose,
+        "onConfirm": handleOnConfirm,
+      }
+
+      // Get the container element where the Destination Selector will be rendered.
+      const container = document.getElementById('destination-selector');
+
+      /**
+       * Renders the Destination Selector UI with IMS authentication, and shows the dialog when it's ready.
+       *
+       * @function renderDestinationSelectorWithAuthFlow
+       * @param {Element} container - The container element where the Destination Selector will be rendered.
+       * @param {DestinationSelectorProps} props - Props for the Destination Selector UI.
+       * @param {Function} callback - A callback function to be called when the UI is ready to be displayed.
+       */
+      PureJSSelectors.renderDestinationSelectorWithAuthFlow(container, props, () => {
+        const destinationSelectorDialog = document.getElementById('destination-selector-dialog');
+        destinationSelectorDialog.showModal();
+      });
+    }
+
+    /**
+     * Initiates the logout flow for the current IMS user using the registered IMS instance.
+     *
+     * @async
+     * @function logoutImsFlow
+     */
+    async function logoutImsFlow() {
+      console.log("Signing out...", imsInstance);
+
+      // Call the signOut method on the registered IMS instance to initiate the logout flow.
+      await imsInstance.signOut();
+    }
+
+  </script>
+</head>
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+
+
+  <div class="container">
+    <div class="left-half">
+      <form>
+
+        <h2>Create your Campaign</h2>
+
+        <!-- Input for title -->
+        <div>
+          <label for="title">Campaign Title:</label>
+          <input type="text" id="title" name="title">
+        </div>
+
+        <!-- Input for Location -->
+        <div>
+          <label for="location">Location:</label>
+          <input list="locations" id="location" name="location">
+          <datalist id="locations">
+            <option value="California">
+            <option value="Texas">
+            <option value="Florida">
+            <option value="Hawaii">
+            <option value="Washington">
+          </datalist>
+        </div>
+
+        <div>
+          <label for="start-time">Start Time:</label>
+          <input type="datetime-local" id="start-time" name="start-time">
+        </div>
+
+        <!-- Date and Time Picker for End Time -->
+        <div>
+          <label for="end-time">End Time:</label>
+          <input type="datetime-local" id="end-time" name="end-time">
+        </div>
+
+        <!-- Checkbox for Show only with available slots -->
+        <div>
+          <label for="available-slots">Show only with available slots:</label>
+          <input type="checkbox" id="available-slots" name="available-slots">
+        </div>
+
+
+
+        <div>
+          <h3>Target Audience</h3>
+
+          <div>
+            <div>
+
+              <label for="age"><span class="toggle" onclick="toggleOptions('age')">+ :</span> Age</label>
+              <div id="age" class="options">
+                <label><input type="checkbox" name="age" value="under18">Under 18</label><br>
+                <label><input type="checkbox" name="age" value="18to24">18 - 24</label><br>
+                <label><input type="checkbox" name="age" value="25to34">25 - 34</label><br>
+                <label><input type="checkbox" name="age" value="35to44">35 - 44</label><br>
+                <label><input type="checkbox" name="age" value="45to54">45 - 54</label><br>
+                <label><input type="checkbox" name="age" value="55to64">55 - 64</label><br>
+                <label><input type="checkbox" name="age" value="65plus">65+</label><br>
+              </div>
+
+            </div>
+
+            <div>
+              <label for="income"><span class="toggle" onclick="toggleOptions('income')">+ :</span>Income </label>
+              <div id="income" class="options">
+                <label><input type="checkbox" name="income" value="low">Low</label><br>
+                <label><input type="checkbox" name="income" value="medium">Medium</label><br>
+                <label><input type="checkbox" name="income" value="high">High</label><br>
+              </div>
+            </div>
+
+            <div>
+              <label for="interest_activity"><span class="toggle" onclick="toggleOptions('interest_activity')">+ :</span> Interest & Activity </label>
+              <div id="interest_activity" class="options">
+                <label><input type="checkbox" name="interest_activity" value="sports">Sports</label><br>
+                <label><input type="checkbox" name="interest_activity" value="music">Music</label><br>
+                <label><input type="checkbox" name="interest_activity" value="travel">Travel</label><br>
+                <label><input type="checkbox" name="interest_activity" value="cooking">Cooking</label><br>
+                <label><input type="checkbox" name="interest_activity" value="cooking">Food</label><br>
+                <label><input type="checkbox" name="interest_activity" value="cooking">Technology</label><br>
+                <!-- Add more options as needed -->
+              </div>
+            </div>
+
+            <div>
+              <label for="life_stage"><span class="toggle" onclick="toggleOptions('life_stage')">+ :</span>Life Stage </label>
+              <div id="life_stage" class="options">
+                <label><input type="checkbox" name="life_stage" value="student">Student</label><br>
+                <label><input type="checkbox" name="life_stage" value="young_adult">Young Adult</label><br>
+                <label><input type="checkbox" name="life_stage" value="adult">Adult</label><br>
+                <label><input type="checkbox" name="life_stage" value="senior">Senior</label><br>
+              </div>
+            </div>
+
+            <div>
+              <label for="gender"><span class="toggle" onclick="toggleOptions('gender')">+ :</span> Gender </label>
+              <div id="gender" class="options">
+                <label><input type="checkbox" name="gender" value="male">Male</label><br>
+                <label><input type="checkbox" name="gender" value="female">Female</label><br>
+                <label><input type="checkbox" name="gender" value="other">Other</label><br>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Checkboxes for Gadgets Lovers -->
+          <div>
+            <p>Gadgets Lovers:</p>
+            <label for="smartphones">
+              <input type="checkbox" id="smartphones" name="gadgets-lover" value="smartphones"> Smartphones
+            </label><br>
+            <label for="laptops">
+              <input type="checkbox" id="laptops" name="gadgets-lover" value="laptops"> Laptops
+            </label><br>
+            <label for="tablets">
+              <input type="checkbox" id="tablets" name="gadgets-lover" value="tablets"> Tablets
+            </label>
+          </div>
+        </div>
+
+        <!-- Checkboxes for Average Viewership -->
+        <div>
+          <p>Average Viewership:</p>
+          <label for="100-person">
+            <input type="checkbox" id="100-person" name="viewership" value="100 person/min"> 100 person/min
+          </label><br>
+          <label for="50-person">
+            <input type="checkbox" id="50-person" name="viewership" value="50 person/min"> 50 person/min
+          </label><br>
+          <label for="10-person">
+            <input type="checkbox" id="10-person" name="viewership" value="10 person/min"> 10 person/min
+          </label>
+        </div>
+        <!-- Input for Slot Price Per Minute -->
+        <div>
+          <label for="slot-price">Slot Price Per Minute:</label>
+          <input type="range" id="slot-price" name="slot-price" min="1" max="100" step="1" placeholder="Enter price">
+        </div>
+
+        <div>
+          <label for="assets">Pick Your Assets (AEM, Polaris, Express):</label>
+          <button type="button" id="assets" onclick="renderAssetSelectorWithImsFlow()">Asset Selector - Select Assets with Ims Flow</button>
+
+<!--          <input type="file" id="assets" name="assets" multiple accept=".zip, .rar, .pdf"> &lt;!&ndash; Limit file types to ZIP, RAR, PDF &ndash;&gt;-->
+
+        </div>
+
+        <div>
+          <label for="estimated-cost">Estimated Cost:</label>
+          <input type="text" id="estimated-cost" name="estimated-cost" value="$1000" readonly>
+        </div>
+
+        <!-- Submit Button -->
+        <input type="submit" value="Submit">
+
+
+      </form>
+    </div>
+    <div class="right-half">
+      <h2>Google Maps</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+<!--  <div>-->
+<!--    <h3>Asset Selectors Consumer Apps in Vanilla JS</h3>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <button onclick="renderAssetSelectorWithImsFlow()">Asset Selector - Select Assets with Ims Flow</button>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <button onclick="renderDestinationSelectorWithImsFlow()">Destination Selector - Select Assets with Ims Flow</button>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <button onclick="location.href='dnd.html'">Asset Selector - Drag & Drop</button>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <button onclick="logoutImsFlow()">(Sign Out)</button>-->
+<!--  </div>-->
+  <div>
+    <dialog id="asset-selector-dialog">
+      <div id="asset-selector" style="height: calc(100vh - 80px); width: calc(100vw - 60px); margin: -20px;"></div>
+    </dialog>
+  </div>
+  <div>
+    <dialog id="destination-selector-dialog">
+      <div id="destination-selector" style="height: 100vh; width: calc(100vw - 60px);"></div>
+    </dialog>
+  </div>
+<!--  <script src="./src/index.js" async="true" type="module"></script>-->
+
+  <script>
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 37.0902, lng: -95.7129 }, // Center map to the USA
+        zoom: 4 // Set an initial zoom level
+      });
+
+      const states = [
+        { name: 'California', coordinates: { lat: 36.7783, lng: -119.4179 }, info: 'California, 2 slots, $10 per slot, 100 p/min' },
+        { name: 'Texas', coordinates: { lat: 31.9686, lng: -99.9018 }, info: 'Texas, 2 slots, $10 per slot, 100 p/min' },
+        { name: 'Florida', coordinates: { lat: 27.994402, lng: -81.760254 }, info: 'Florida, 2 slots, $10 per slot, 100 p/min' },
+        { name: 'Hawaii', coordinates: { lat: 20.7984, lng: -156.3319 }, info: 'Hawaii, 2 slots, $10 per slot, 100 p/min' },
+        { name: 'Washington', coordinates: { lat: 47.7511, lng: -120.7401 }, info: 'Washington, 2 slots, $10 per slot, 100 p/min' }
+      ];
+
+      for (const state of states) {
+        const marker = new google.maps.Marker({
+          position: state.coordinates,
+          map,
+          title: state.name
+        });
+
+        const infowindow = new google.maps.InfoWindow({
+          content: state.info
+        });
+
+        marker.addListener('mouseover', () => {
+          infowindow.open(map, marker);
+        });
+
+        marker.addListener('mouseout', () => {
+          infowindow.close(map, marker);
+        });
+      }
+    }
+    google.maps.event.addDomListener(window, 'load', initMap);
+    function updatePrice(val) {
+      document.getElementById('price').innerText = val;
+    }
+
+    function toggleOptions(demographic) {
+      const options = document.getElementById(`${demographic}`);
+      options.style.display = options.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>
