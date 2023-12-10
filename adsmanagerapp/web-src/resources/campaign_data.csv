@@ -1,0 +1,101 @@
+Player Id,Location,Latitude,Longitude,Available slots,Target Age,Target Income,Activity,Gender
+1,Hawaii,64.08746009843992,-107.2733346983118,5,young,high,Music,Male
+2,Florida,35.42953534249001,45.465258556933634,4,student,middle,Sports,Female
+3,Florida,34.98059381989886,88.74327837851456,6,middle age,middle,Music,Female
+4,Washington,5.790233619130902,-107.49078584355107,0,old age,high,Sports,Female
+5,Florida,45.03399612474266,-132.99036661941517,2,middle age,middle,Travel,Other
+6,Washington,-17.642311400885987,170.24318291131067,0,old age,low,Travel,Other
+7,Hawaii,-5.741599643192785,-60.71295972245052,6,young,low,Travel,Male
+8,Hawaii,64.08746009843992,-107.2733346983118,1,student,low,Travel,Female
+9,California,87.0057266710335,40.62668560138499,4,student,high,Travel,Female
+10,California,7.361982928701536,120.00096639008274,5,old age,middle,Cooking,Female
+11,Florida,-75.89779937098075,136.6494359694696,5,young,high,Travel,Female
+12,Washington,5.790233619130902,-107.49078584355107,1,young,high,Travel,Male
+13,Texas,74.30031011892927,-95.661643810121,2,middle age,low,Travel,Male
+14,California,60.11876238647852,-5.852205369757485,5,old age,low,Cooking,Male
+15,Washington,-61.9955976994498,-121.28087875331329,5,middle age,low,Travel,Male
+16,Florida,35.42953534249001,45.465258556933634,2,young,low,Travel,Female
+17,Hawaii,51.56161463746065,-126.3281060254157,1,student,high,Sports,Male
+18,California,87.0057266710335,40.62668560138499,1,young,low,Cooking,Other
+19,Florida,46.19442651240797,-24.23216975138621,4,young,middle,Music,Male
+20,Texas,44.792635929394095,87.57433175674998,3,old age,middle,Sports,Male
+21,California,-13.244405317546878,-123.25804650197584,4,middle age,high,Sports,Male
+22,California,-27.456141342848518,-148.2038376729172,2,old age,low,Sports,Male
+23,Florida,45.03399612474266,-132.99036661941517,1,young,low,Sports,Male
+24,California,-13.244405317546878,-123.25804650197584,0,middle age,low,Travel,Female
+25,California,12.581244596563266,-53.128230359003524,6,old age,high,Travel,Female
+26,Hawaii,-57.74657652728402,138.98954755135583,2,old age,middle,Travel,Male
+27,Texas,51.54259642901323,115.77683343318597,4,young,low,Sports,Male
+28,Florida,-7.75479081305572,-62.148848901199045,4,middle age,middle,Cooking,Male
+29,Washington,-17.642311400885987,170.24318291131067,3,old age,low,Music,Female
+30,Hawaii,-37.23807863828779,-40.423479678545306,3,young,high,Music,Male
+31,California,7.361982928701536,120.00096639008274,4,student,high,Music,Male
+32,California,13.89894675686439,-21.967234225261848,4,old age,low,Cooking,Male
+33,Hawaii,-54.53769202011488,121.1520847413812,4,middle age,middle,Travel,Male
+34,Texas,21.221217135037506,-59.824707192102,5,middle age,low,Music,Other
+35,Washington,72.77284896849966,68.94448154125797,2,middle age,low,Travel,Female
+36,Washington,5.790233619130902,-107.49078584355107,3,middle age,high,Cooking,Other
+37,Florida,35.42953534249001,45.465258556933634,4,middle age,middle,Cooking,Other
+38,Hawaii,-5.741599643192785,-60.71295972245052,5,young,middle,Music,Other
+39,Texas,-69.73076404304605,176.07444642562706,1,old age,middle,Sports,Female
+40,Hawaii,-57.74657652728402,138.98954755135583,1,young,low,Sports,Other
+41,Washington,-17.642311400885987,170.24318291131067,4,young,high,Sports,Male
+42,Washington,-17.642311400885987,170.24318291131067,4,student,high,Music,Male
+43,Florida,35.42953534249001,45.465258556933634,4,young,low,Music,Other
+44,Florida,45.03399612474266,-132.99036661941517,2,young,low,Music,Other
+45,Hawaii,87.8465656520037,-151.73990987564375,2,middle age,low,Travel,Male
+46,Texas,-3.5096428177744343,92.43133905033233,3,middle age,low,Cooking,Other
+47,California,87.0057266710335,40.62668560138499,0,middle age,high,Music,Female
+48,California,-13.244405317546878,-123.25804650197584,0,student,high,Sports,Male
+49,Hawaii,-57.74657652728402,138.98954755135583,5,old age,middle,Cooking,Other
+50,Hawaii,-37.23807863828779,-40.423479678545306,6,middle age,high,Cooking,Female
+51,Texas,45.07255497668896,10.600331088670941,5,student,low,Sports,Female
+52,California,60.11876238647852,-5.852205369757485,3,student,high,Cooking,Male
+53,Washington,-17.642311400885987,170.24318291131067,3,young,high,Travel,Female
+54,Texas,-69.73076404304605,176.07444642562706,6,student,high,Cooking,Female
+55,Washington,-16.05773805885812,126.95475439978594,4,young,high,Sports,Male
+56,California,-77.93458054331904,-12.811857157302057,5,middle age,high,Sports,Male
+57,California,60.11876238647852,-5.852205369757485,3,middle age,middle,Travel,Male
+58,Hawaii,64.08746009843992,-107.2733346983118,5,middle age,middle,Sports,Male
+59,Washington,-61.9955976994498,-121.28087875331329,6,student,low,Sports,Other
+60,Washington,72.77284896849966,68.94448154125797,2,old age,high,Cooking,Other
+61,Washington,-27.748094134062214,-105.23238778432072,6,old age,middle,Cooking,Male
+62,Texas,41.26266094720623,-100.72604094242693,3,middle age,low,Sports,Female
+63,Washington,-61.9955976994498,-121.28087875331329,6,young,high,Cooking,Male
+64,Florida,77.442316985959,40.16093261395824,6,student,low,Travel,Male
+65,Hawaii,-5.741599643192785,-60.71295972245052,1,old age,low,Sports,Male
+66,Florida,45.03399612474266,-132.99036661941517,6,student,low,Travel,Female
+67,Washington,-69.77776144735758,-24.092454310580877,6,young,high,Sports,Female
+68,Florida,77.442316985959,40.16093261395824,0,student,high,Cooking,Male
+69,California,-13.244405317546878,-123.25804650197584,6,middle age,middle,Sports,Male
+70,Florida,-7.75479081305572,-62.148848901199045,0,middle age,middle,Cooking,Other
+71,California,68.77306595586106,69.4421449106261,6,middle age,middle,Music,Other
+72,California,-13.244405317546878,-123.25804650197584,6,old age,middle,Sports,Female
+73,Florida,-75.89779937098075,136.6494359694696,1,young,low,Sports,Other
+74,California,7.361982928701536,120.00096639008274,1,middle age,high,Sports,Other
+75,Florida,-27.956387842627564,122.17943390482412,0,young,middle,Cooking,Female
+76,California,68.77306595586106,69.4421449106261,4,young,high,Sports,Female
+77,Florida,46.19442651240797,-24.23216975138621,2,young,high,Travel,Male
+78,California,68.77306595586106,69.4421449106261,6,young,high,Sports,Other
+79,Hawaii,-35.023964964954445,161.72214981370126,2,student,high,Sports,Female
+80,Hawaii,64.08746009843992,-107.2733346983118,4,student,low,Sports,Male
+81,Hawaii,-57.74657652728402,138.98954755135583,4,middle age,high,Cooking,Female
+82,Texas,44.792635929394095,87.57433175674998,1,young,middle,Sports,Other
+83,California,-77.93458054331904,-12.811857157302057,0,old age,middle,Music,Other
+84,Texas,44.792635929394095,87.57433175674998,2,old age,middle,Sports,Female
+85,California,12.581244596563266,-53.128230359003524,6,student,high,Travel,Male
+86,Washington,-17.642311400885987,170.24318291131067,1,young,high,Sports,Male
+87,California,7.361982928701536,120.00096639008274,4,young,middle,Travel,Female
+88,Florida,46.19442651240797,-24.23216975138621,5,middle age,low,Music,Female
+89,Texas,51.54259642901323,115.77683343318597,5,young,high,Music,Male
+90,Washington,-61.9955976994498,-121.28087875331329,3,student,high,Sports,Female
+91,Texas,45.07255497668896,10.600331088670941,6,student,high,Travel,Male
+92,Texas,-3.5096428177744343,92.43133905033233,0,old age,high,Music,Male
+93,California,87.0057266710335,40.62668560138499,2,old age,low,Sports,Male
+94,Hawaii,-57.74657652728402,138.98954755135583,5,young,low,Cooking,Male
+95,Washington,72.77284896849966,68.94448154125797,6,young,low,Music,Other
+96,Florida,45.03399612474266,-132.99036661941517,5,student,high,Travel,Other
+97,Texas,21.221217135037506,-59.824707192102,4,young,low,Cooking,Male
+98,Washington,-69.77776144735758,-24.092454310580877,5,middle age,middle,Sports,Male
+99,Washington,-69.77776144735758,-24.092454310580877,1,middle age,high,Sports,Female
+100,Hawaii,13.844296203119015,97.30750013020719,2,middle age,high,Music,Male
