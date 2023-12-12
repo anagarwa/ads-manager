@@ -87,8 +87,46 @@ function destinationSelectorOnClose() {
  */
 function handleSelection(selection) {
     console.log('Selected asset:', selection);
+
+    const thumbnailsContainer = document.getElementById('selected-thumbnails'); // Assuming there's an element with this ID to contain the thumbnails
+
+    // Clear existing thumbnails before displaying new ones
+    thumbnailsContainer.innerHTML = '';
+
+    // Loop through each selected asset and create thumbnail elements
+    selection.forEach(asset => {
+        const thumbnailUrl = getThumbnailUrl(asset); // Assuming you have a function to extract the appropriate thumbnail URL
+        if (thumbnailUrl) {
+            const img = document.createElement('img');
+            img.src = thumbnailUrl;
+            img.alt = asset.name; // Set alt attribute for accessibility
+            img.style.width = '100px'; // Set width as needed
+            img.style.height = '100px'; // Set height as needed
+
+            // Append the thumbnail image to the container
+            thumbnailsContainer.appendChild(img);
+        }
+    });
     onClose();
 };
+
+function getThumbnailUrl(asset) {
+    // Check if the selection object contains a _links property and it has rendition URLs
+    if (asset._links && asset._links['http://ns.adobe.com/adobecloud/rel/rendition']) {
+        // Select the first link (assuming it's a small thumbnail) and return its href
+        const renditions = asset._links['http://ns.adobe.com/adobecloud/rel/rendition'];
+        let maxThumbnail = renditions[0]; // Initialize with the first rendition
+        for (let i = 1; i < renditions.length; i++) {
+            if (renditions[i].height > maxThumbnail.height) {
+                maxThumbnail = renditions[i]; // Update maxThumbnail if higher height is found
+            }
+        }
+        return maxThumbnail.href;
+    }
+
+    // If no suitable thumbnail URL is found, you can provide a default fallback or handle it accordingly
+    return ''; // Return an empty string or any default URL
+}
 
 
 

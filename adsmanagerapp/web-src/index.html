@@ -12,6 +12,7 @@
   <script src="https://experience.adobe.com/solutions/CQ-assets-selectors/static-assets/resources/assets-selectors.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5BFpnFF4QjsnZwWuNtYDNX_gK9H2LjA0&libraries=places"></script>
   <script src="./src/assetselector.js"></script>
+
 </head>
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -20,7 +21,7 @@
 
   <div class="container">
     <div class="left-half">
-      <form>
+      <form id="campaignForm">
 
         <h2>Create your Campaign</h2>
 
@@ -52,6 +53,13 @@
         <div>
           <label for="end-time">End Time:</label>
           <input type="datetime-local" id="end-time" name="end-time">
+        </div>
+
+        <!-- Checkbox for Show only with available slots -->
+        <div>
+          <label for="numberOfSlots">Select Number slots:</label>
+          <input type="number" id="numberOfSlots" name="numberOfSlots" min="1" max="6" step="1" placeholder="Enter a number (1-6)">
+          <span><p id="numberOfSlotsText"><p></span>
         </div>
 
         <!-- Checkbox for Show only with available slots -->
@@ -125,23 +133,23 @@
           </div>
 
           <!-- Checkboxes for Gadgets Lovers -->
-          <div>
-            <p>Gadgets Lovers:</p>
-            <label for="smartphones">
-              <input type="checkbox" id="smartphones" name="gadgets-lover" value="smartphones"> Smartphones
-            </label><br>
-            <label for="laptops">
-              <input type="checkbox" id="laptops" name="gadgets-lover" value="laptops"> Laptops
-            </label><br>
-            <label for="tablets">
-              <input type="checkbox" id="tablets" name="gadgets-lover" value="tablets"> Tablets
-            </label>
-          </div>
-        </div>
+<!--          <div>-->
+<!--            <p>Gadgets Lovers:</p>-->
+<!--            <label for="smartphones">-->
+<!--              <input type="checkbox" id="smartphones" name="gadgets-lover" value="smartphones"> Smartphones-->
+<!--            </label><br>-->
+<!--            <label for="laptops">-->
+<!--              <input type="checkbox" id="laptops" name="gadgets-lover" value="laptops"> Laptops-->
+<!--            </label><br>-->
+<!--            <label for="tablets">-->
+<!--              <input type="checkbox" id="tablets" name="gadgets-lover" value="tablets"> Tablets-->
+<!--            </label>-->
+<!--          </div>-->
+<!--        </div>-->
 
         <!-- Checkboxes for Average Viewership -->
         <div>
-          <p>Average Viewership:</p>
+          <h3>Average Viewership:</h3>
           <label for="100-person">
             <input type="checkbox" id="100-person" name="viewership" value="100 person/min"> 100 person/min
           </label><br>
@@ -154,13 +162,15 @@
         </div>
         <!-- Input for Slot Price Per Minute -->
         <div>
-          <label for="slot-price">Slot Price Per Minute:</label>
+          <label for="slot-price">Slot Price:</label>
           <input type="range" id="slot-price" name="slot-price" min="1" max="100" step="1" placeholder="Enter price">
+          <span id="slot-price-value"></span>
         </div>
 
         <div>
           <label for="assets">Pick Your Assets (AEM, Polaris, Express):</label>
           <button type="button" id="assets" onclick="renderAssetSelectorWithImsFlow()">Asset Selector - Select Assets with Ims Flow</button>
+          <div id="selected-thumbnails"></div>
 
 <!--          <input type="file" id="assets" name="assets" multiple accept=".zip, .rar, .pdf"> &lt;!&ndash; Limit file types to ZIP, RAR, PDF &ndash;&gt;-->
 
@@ -168,7 +178,7 @@
 
         <div>
           <label for="estimated-cost">Estimated Cost:</label>
-          <input type="text" id="estimated-cost" name="estimated-cost" value="$1000" readonly>
+          <input type="text" id="estimated-cost" name="estimated-cost" value="$0" readonly>
         </div>
 
         <!-- Submit Button -->
@@ -220,5 +230,6 @@
 <!--  <script src="./src/index.js" async="true" type="module"></script>-->
 
   <script src="./src/mapInit.js"></script>
+  <script src="./src/campaigngeneration.js"></script>
 </body>
 </html>
