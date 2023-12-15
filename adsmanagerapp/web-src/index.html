@@ -12,6 +12,13 @@
   <script src="https://experience.adobe.com/solutions/CQ-assets-selectors/static-assets/resources/assets-selectors.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5BFpnFF4QjsnZwWuNtYDNX_gK9H2LjA0&libraries=places"></script>
   <script src="./src/assetselector.js"></script>
+<!--  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">-->
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -171,6 +178,23 @@
           <label for="assets">Pick Your Assets (AEM, Polaris, Express):</label>
           <button type="button" id="assets" onclick="renderAssetSelectorWithImsFlow()">Asset Selector - Select Assets with Ims Flow</button>
           <div id="selected-thumbnails"></div>
+          <button type="button" onclick="openPreviewDialog()">Preview</button>
+          <dialog id="my-dialog">
+            <h3>Image Preview</h3>
+            <div class="thumbnail-container">
+              <div class="image-container">
+                <img  class="dialog-thumbnail"  src="https://delivery-p47604-e144858-cmstg.adobeaemcloud.com/adobe/dynamicmedia/deliver/urn:aaid:aem:f1a0b1dc-90cf-4494-adff-ac0b9b77b677/test.jpg" alt="First Image Thumbnail">
+                <label>LandScape</label>
+                <input type="file" class="thumbnail-button" >
+              </div>
+              <div class="image-container">
+                <img  class="dialog-thumbnail"  src="https://mobiletest.scene7.com/is/image/kasingh?layer=0&src=ai(kasingh/test-1?genExtend=3:4&op_gen=get)" alt="Second Image Thumbnail">
+                <label>Portrait</label>
+                <input type="file" class="thumbnail-button" >
+              </div>
+            </div>
+            <button id="close-dialog" onclick="closePreviewDialog()">Close</button>
+          </dialog>
 
 <!--          <input type="file" id="assets" name="assets" multiple accept=".zip, .rar, .pdf"> &lt;!&ndash; Limit file types to ZIP, RAR, PDF &ndash;&gt;-->
 
@@ -231,5 +255,6 @@
 
   <script src="./src/mapInit.js"></script>
   <script src="./src/campaigngeneration.js"></script>
+  <script src ="./src/preview.js"></script>
 </body>
 </html>

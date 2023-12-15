@@ -136,3 +136,47 @@ h3 {
 #numberOfSlots {
   width: 150px;
 }
+
+#my-dialog {
+  width: 30%; /* Adjust the width as needed */
+  max-width: 900px; /* Set a maximum width */
+  height: 30%; /* Adjust the height as needed */
+  max-height: 900px; /* Set a maximum height */
+}
+
+#close-dialog {
+  position: absolute; /* Position the close button */
+  bottom: 10px; /* Set distance from the bottom */
+  right: 10px; /* Set distance from the right */
+}
+
+.thumbnail-container {
+  width: 100%; /* Adjust width of the container */
+  display: flex;
+  flex-direction: row; /* Arrange items vertically */
+}
+
+.image-container {
+  width: 50%; /* Adjust width of the container */
+  display: flex;
+  flex-direction: column; /* Arrange items vertically */
+  justify-content: flex-end;
+}
+
+/*.dialog-thumbnail {*/
+/*  width: 40% ; !* Adjust the width of the thumbnails *!*/
+/*  height: auto;*/
+/*  margin-left: 25px;*/
+/*}*/
+
+
+/* CSS for the thumbnail images */
+.dialog-thumbnail {
+  max-width: 100px; /* Adjust the width of the thumbnails */
+  height: auto;
+  margin-bottom: 5px; /* Add some spacing between thumbnails and labels */
+}
+
+.thumbnail-button {
+  width: 100px;
+}

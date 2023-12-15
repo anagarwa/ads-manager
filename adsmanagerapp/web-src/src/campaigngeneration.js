@@ -42,6 +42,7 @@ document.getElementById('campaignForm').addEventListener('submit', function(even
         })
         .then(data => {
             console.log('Post request successful:', data);
+            alert('Campaign url : https://main--ads-campaign--sandesh-sinha.hlx.live/content/screens/locations/us/sanjose');
             // Perform actions with the response data if needed
         })
         .catch(error => {
