@@ -180,3 +180,18 @@ h3 {
 .thumbnail-button {
   width: 100px;
 }
+
+.cost-estimation {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.cost-estimation p {
+  font-weight: bold;
+  font-size: 18px; /* You can adjust the font size as needed */
+}
+
+#estimated-cost {
+  padding-left: 10px;
+}

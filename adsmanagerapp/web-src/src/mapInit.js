@@ -225,11 +225,11 @@ document.getElementById('location').addEventListener('change', function() {
 
 document.getElementById('available-slots').addEventListener('change', function() {
 
-    const estimatedCostInput = document.getElementById('estimated-cost');
+   // const estimatedCostInput = document.getElementById('estimated-cost');
 
     if (this.checked) {
         removeFirstMarker();
-        estimatedCostInput.value = "$1000";
+       // estimatedCostInput.innerText = "$5000";
 
     }
 });

@@ -107,6 +107,8 @@ function handleSelection(selection) {
             thumbnailsContainer.appendChild(img);
         }
     });
+    const estimatedCostInput = document.getElementById('estimated-cost');
+    estimatedCostInput.innerText = "$5000";
     onClose();
 };
 

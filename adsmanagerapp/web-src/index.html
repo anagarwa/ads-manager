@@ -156,22 +156,22 @@
 
         <!-- Checkboxes for Average Viewership -->
         <div>
-          <h3>Average Viewership:</h3>
+          <h3>Screens Placement: Viewership</h3>
           <label for="100-person">
-            <input type="checkbox" id="100-person" name="viewership" value="100 person/min"> 100 person/min
+            <input type="checkbox" id="100-person" name="viewership" value="100 person/min"> Front Entry -  (100 person/min)
           </label><br>
           <label for="50-person">
-            <input type="checkbox" id="50-person" name="viewership" value="50 person/min"> 50 person/min
+            <input type="checkbox" id="50-person" name="viewership" value="50 person/min"> Middle Asile - (50 person/min)
           </label><br>
           <label for="10-person">
-            <input type="checkbox" id="10-person" name="viewership" value="10 person/min"> 10 person/min
+            <input type="checkbox" id="10-person" name="viewership" value="10 person/min"> Last Asile - (10 person/min)
           </label>
         </div>
         <!-- Input for Slot Price Per Minute -->
         <div>
           <label for="slot-price">Slot Price:</label>
           <input type="range" id="slot-price" name="slot-price" min="1" max="100" step="1" placeholder="Enter price">
-          <span id="slot-price-value"></span>
+          <span id="slot-price-value">Not more than $50 per slot</span>
         </div>
 
         <div>
@@ -183,12 +183,12 @@
             <h3>Image Preview</h3>
             <div class="thumbnail-container">
               <div class="image-container">
-                <img  class="dialog-thumbnail"  src="https://delivery-p47604-e144858-cmstg.adobeaemcloud.com/adobe/dynamicmedia/deliver/urn:aaid:aem:f1a0b1dc-90cf-4494-adff-ac0b9b77b677/test.jpg" alt="First Image Thumbnail">
+                <img  class="dialog-thumbnail"  src="https://delivery-p47604-e144858-cmstg.adobeaemcloud.com/adobe/dynamicmedia/deliver/urn:aaid:aem:a4343c7c-ca37-4e78-a9b6-c63a8ae68787/TshirtErasTour.jpeg" alt="First Image Thumbnail">
                 <label>LandScape</label>
                 <input type="file" class="thumbnail-button" >
               </div>
               <div class="image-container">
-                <img  class="dialog-thumbnail"  src="https://mobiletest.scene7.com/is/image/kasingh?layer=0&src=ai(kasingh/test-1?genExtend=3:4&op_gen=get)" alt="Second Image Thumbnail">
+                <img  class="dialog-thumbnail"  src="https://mobiletest.scene7.com/is/image/kasingh?layer=0&src=ai(kasingh/TshirtErasTour?genExtend=3:4&op_gen=get)" alt="Second Image Thumbnail">
                 <label>Portrait</label>
                 <input type="file" class="thumbnail-button" >
               </div>
@@ -200,9 +200,9 @@
 
         </div>
 
-        <div>
-          <label for="estimated-cost">Estimated Cost:</label>
-          <input type="text" id="estimated-cost" name="estimated-cost" value="$0" readonly>
+        <div class="cost-estimation">
+          <p >Estimated Cost:</p>
+          <p id="estimated-cost" name="estimated-cost" ></p>
         </div>
 
         <!-- Submit Button -->
